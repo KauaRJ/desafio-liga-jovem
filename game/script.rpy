@@ -164,6 +164,7 @@ default tutorials_first_time = True
 # The game starts here.
 #begin start
 label start:
+
 #end start
 
     scene bg washington

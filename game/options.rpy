@@ -14,12 +14,12 @@
 
 define config.name = _("Lifes as a code")
 
+define config.default_language = "portuguese"
 
 ## Determines if the title given above is shown on the main menu screen. Set
 ## this to False to hide the title.
 
 define gui.show_name = True
-
 
 ## The version of the game.
 
