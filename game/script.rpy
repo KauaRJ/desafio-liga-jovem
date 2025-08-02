@@ -257,5 +257,4 @@ label modo_DungeonCrawler:
         "Voltar ao Menu Principal":
             return
 
-label desafio_if_else_pratica:
     
