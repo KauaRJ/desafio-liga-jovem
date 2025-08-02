@@ -52,6 +52,30 @@ init python:
 
             tutorials.append(self)
 
+    # Classe do Jogador
+    class Jogador:
+        def __init__(self, nome):
+            self.nome = nome
+            self.vida = 100
+            self.vida_maxima = 100
+            self.inteligencia = 10
+            self.pontuacao_pratica = 0  # Variável para a pontuação acumulada
+            self.habilidades = ["Condicional", "Laço", "Vetor"]
+
+    # Classe do Inimigo (ou Desafio)
+    class Desafio:
+        def __init__(self, nome, vida, dificuldade, pontos):
+            self.nome = nome
+            self.vida = vida
+            self.dificuldade = dificuldade
+            self.pontos = pontos
+            self.ataque_base = 15
+
+    # Cria uma instância do jogador
+    store.Jogador = Jogador("Heroi")
+    
+
+
 
     Section(_("Quickstart"))
 
@@ -218,3 +242,20 @@ label end:
 
     # Returning from the top level quits the game.
     return
+
+label modo_DungeonCrawler:
+    "Bem-vindo ao Modo Prática! Aqui você pode treinar conceitos específicos."
+
+    # Adicione a lógica para os desafios de prática aqui.
+    # Por exemplo, um menu que permite escolher qual tópico praticar.
+    
+    menu:
+        "Praticar If/Else":
+            jump desafio_if_else_pratica
+        "Praticar Loops":
+            jump desafio_loops_pratica
+        "Voltar ao Menu Principal":
+            return
+
+label desafio_if_else_pratica:
+    
