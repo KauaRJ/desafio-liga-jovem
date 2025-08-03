@@ -11,7 +11,9 @@
 define e = Character(_('Eileen'), color="#c8ffc8")
 
 init python:
-
+    
+    import random # Importar para usar random.choice e random.shuffle
+    
     # A list of section and tutorial objects.
     tutorials = [ ]
 
@@ -57,22 +59,100 @@ init python:
         def __init__(self, nome):
             self.nome = nome
             self.vida = 100
-            self.vida_maxima = 100
-            self.inteligencia = 10
-            self.pontuacao_pratica = 0  # Variável para a pontuação acumulada
-            self.habilidades = ["Condicional", "Laço", "Vetor"]
+            self.vida_maxima = 100 # Para barras de vida e recuperação
+            self.inteligencia = 10  # Pode influenciar o dano em combate
+            self.pontuacao_pratica = 0  # Pontuação acumulada no modo de prática
+            self.habilidades = ["Condicional", "Laço", "Vetor", "String", "Matriz", "Função"] # Habilidades baseadas nos tópicos
 
     # Classe do Inimigo (ou Desafio)
     class Desafio:
-        def __init__(self, nome, vida, dificuldade, pontos):
-            self.nome = nome
-            self.vida = vida
-            self.dificuldade = dificuldade
-            self.pontos = pontos
-            self.ataque_base = 15
+        def __init__(self, nome, vida, tipo_desafio, pontos, problema, codigo, opcoes, resposta_correta, nivel_dificuldade):
+            self.nome = nome                                                 # Nome do "inimigo" (ex: "Bug de Sintaxe", "Erro de Laço Infinito")
+            self.vida = vida                                                 # "Vida" do desafio, que diminui com acertos
+            self.tipo_desafio = tipo_desafio                                 # Tópico de lógica (ex: "If/Else", "Loop", "Vetor")
+            self.pontos = pontos                                             # Pontos ganhos ao vencer o desafio
+            self.ataque_base = 15                                            # Dano que o desafio causa ao jogador se ele errar ou passar a vez
+            self.problema = problema                                         # Enunciado do problema em texto (ex: "Qual a saída do código?")
+            self.codigo = codigo                                             # Trecho de código a ser exibido (lista de strings, uma linha por item)
+            self.opcoes = opcoes                                             # Lista de strings com as opções de múltipla escolha
+            self.resposta_correta = resposta_correta                         # A string exata que corresponde à resposta correta
+            self.nivel_dificuldade = nivel_dificuldade                       # Ex: "FAC_Basico", "FAC_Avancado", "FPR_Basico"
 
     # Cria uma instância do jogador
     store.Jogador = Jogador("Heroi")
+
+    # Dicionário de desafios, agrupados por nível de dificuldade/tópico.
+    # Esta é a lista MESTRA de todos os desafios disponíveis.
+    store.desafio_por_dificuldade= {
+        "FAC_Basico": [
+            Desafio(
+                nome="Calculadora de IMC",
+                vida=50,
+                tipo_desafio="If/Else",
+                pontos=100,
+                problema="Segundo o código a seguir, em que condições o IMC está ideal?",
+                codigo=["float imc = peso / (altura * altura);", 
+                        ],
+                opcoes=["Abaixo do peso", "Peso ideal", "Sobrepeso"],
+                resposta_correta="Peso ideal",
+                nivel_dificuldade="FAC_Basico"
+            ),
+            Desafio(
+                nome="Completando a Condição",
+                vida=50,
+                tipo_desafio="If/Else",
+                pontos=100,
+                problema="Complete a linha em branco para que o código imprima 'Aprovado' se a nota for maior ou igual a 7.",
+                codigo=["int nota = 8;", "if (__________) {", "  printf('Aprovado');", "}"],
+                opcoes=["A. nota > 7", "B. nota >= 7", "C. nota == 7"],
+                resposta_correta="B. nota >= 7",
+                nivel_dificuldade="FAC_Basico"
+            ),
+            # Adicione mais desafios FAC_Basico aqui
+        ],
+        "FAC_Intermediario": [
+            Desafio(
+                nome="Erro de Laço Infinito",
+                vida=75,
+                tipo_desafio="Loop",
+                pontos=150,
+                problema="O loop abaixo está errado. O que causa o loop infinito?",
+                codigo=["for (int i = 0; i < 10; i--) {"],
+                opcoes=["A condição 'i < 10'", "O decremento 'i--'", "A inicialização 'i = 0'"],
+                resposta_correta="O decremento 'i--'",
+                nivel_dificuldade="FAC_Intermediario"
+            ),
+            Desafio(
+                nome="Vetor Desordenado",
+                vida=90,
+                tipo_desafio="Vetor",
+                pontos=200,
+                problema="Corrija o código para ordenar os elementos de um vetor.",
+                codigo=["int arr[] = {5, 2, 8, 1};", "for (int i = 0; i < 4; i++) {", "  // Código de ordenação faltando", "}"],
+                opcoes=["Usar Bubble Sort", "Usar Selection Sort", "Usar Insertion Sort"],
+                resposta_correta="Usar Bubble Sort", # Exemplo
+                nivel_dificuldade="FAC_Intermediario"
+            ),
+            # Adicione mais desafios FAC_Intermediario aqui
+        ],
+        "FPR_Basico": [
+            Desafio(
+                nome="Cardápio da Lanchonete",
+                vida=90,
+                tipo_desafio="Estruturas de Decisão",
+                pontos=180,
+                problema="Você comprou um 'Cachorro quente'. Qual o código correspondente?",
+                codigo=["// Código da lanchonete aqui"],
+                opcoes=["100", "101", "102"],
+                resposta_correta="100",
+                nivel_dificuldade="FPR_Basico"
+            ),
+            # Adicione mais desafios FPR_Basico aqui
+        ],
+        # Adicione outros níveis de dificuldade como "FPR_Avancado", "FAC_Avancado" etc.
+    }
+
+
     
 
 
@@ -258,4 +338,3 @@ label modo_DungeonCrawler:
         "Voltar ao Menu Principal":
             return
 
-    
