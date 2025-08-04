@@ -22,7 +22,7 @@ init python:
         Represents a section of the tutorial menu.
 
         `title`
-            The title of the section. This should be a translatable string.
+        The title of the section. This should be a translatable string.
         """
 
         def __init__(self, title):
@@ -67,16 +67,16 @@ init python:
     # Classe do Inimigo (ou Desafio)
     class Desafio:
         def __init__(self, nome, vida, tipo_desafio, pontos, problema, codigo, opcoes, resposta_correta, nivel_dificuldade):
-            self.nome = nome                                                 # Nome do "inimigo" (ex: "Bug de Sintaxe", "Erro de Laço Infinito")
-            self.vida = vida                                                 # "Vida" do desafio, que diminui com acertos
-            self.tipo_desafio = tipo_desafio                                 # Tópico de lógica (ex: "If/Else", "Loop", "Vetor")
-            self.pontos = pontos                                             # Pontos ganhos ao vencer o desafio
-            self.ataque_base = 15                                            # Dano que o desafio causa ao jogador se ele errar ou passar a vez
-            self.problema = problema                                         # Enunciado do problema em texto (ex: "Qual a saída do código?")
-            self.codigo = codigo                                             # Trecho de código a ser exibido (lista de strings, uma linha por item)
-            self.opcoes = opcoes                                             # Lista de strings com as opções de múltipla escolha
-            self.resposta_correta = resposta_correta                         # A string exata que corresponde à resposta correta
-            self.nivel_dificuldade = nivel_dificuldade                       # Ex: "FAC_Basico", "FAC_Avancado", "FPR_Basico"
+            self.nome = nome                                                      # Nome do "inimigo" (ex: "Bug de Sintaxe", "Erro de Laço Infinito")
+            self.vida = vida                                                      # "Vida" do desafio, que diminui com acertos
+            self.tipo_desafio = tipo_desafio                                      # Tópico de lógica (ex: "If/Else", "Loop", "Vetor")
+            self.pontos = pontos                                                  # Pontos ganhos ao vencer o desafio
+            self.ataque_base = 15                                                  # Dano que o desafio causa ao jogador se ele errar ou passar a vez
+            self.problema = problema                                              # Enunciado do problema em texto (ex: "Qual a saída do código?")
+            self.codigo = codigo                                                  # Trecho de código a ser exibido (lista de strings, uma linha por item)
+            self.opcoes = opcoes                                                  # Lista de strings com as opções de múltipla escolha
+            self.resposta_correta = resposta_correta                              # A string exata que corresponde à resposta correta
+            self.nivel_dificuldade = nivel_dificuldade                            # Ex: "FAC_Basico", "FAC_Avancado", "FPR_Basico"
 
     # Cria uma instância do jogador
     store.Jogador = Jogador("Heroi")
@@ -85,30 +85,82 @@ init python:
     # Esta é a lista MESTRA de todos os desafios disponíveis.
     store.desafio_por_dificuldade= {
         "FAC_Basico": [
+            # --- FAC - Lista de Exercícios II - QUESTÃO 01: IMC ---
             Desafio(
                 nome="Calculadora de IMC",
                 vida=50,
                 tipo_desafio="If/Else",
                 pontos=100,
-                problema="Segundo o código a seguir, em que condições o IMC está ideal?",
-                codigo=["float imc = peso / (altura * altura);", 
-                        ],
-                opcoes=["Abaixo do peso", "Peso ideal", "Sobrepeso"],
-                resposta_correta="Peso ideal",
+                problema="Um algoritmo calcula o IMC e classifica a pessoa. Qual a condição CORRETA para 'Peso ideal'?",
+                codigo=[
+                    "float peso, altura, imc;",
+                    "// ... código para ler peso e altura ...",
+                    "imc = peso / (altura * altura);",
+                    "if (imc < 18.5) { printf('Abaixo do peso'); }",
+                    "else if (__________) { printf('Peso ideal'); }", # Linha a completar
+                    "else if (imc < 30.0) { printf('Sobrepeso'); }"
+                ],
+                opcoes=[
+                    "A. imc >= 18.5 && imc <= 25.0",
+                    "B. imc >= 18.5 && imc < 25.0",
+                    "C. imc > 18.5 && imc < 25.0",
+                    "D. imc >= 18.5 || imc < 25.0"
+                ],
+                resposta_correta="B. imc >= 18.5 && imc < 25.0",
                 nivel_dificuldade="FAC_Basico"
             ),
+            # --- FAC - Lista de Exercícios I - QUESTÃO 02: Classificação Nadador ---
             Desafio(
-                nome="Completando a Condição",
-                vida=50,
-                tipo_desafio="If/Else",
-                pontos=100,
-                problema="Complete a linha em branco para que o código imprima 'Aprovado' se a nota for maior ou igual a 7.",
-                codigo=["int nota = 8;", "if (__________) {", "  printf('Aprovado');", "}"],
-                opcoes=["A. nota > 7", "B. nota >= 7", "C. nota == 7"],
-                resposta_correta="B. nota >= 7",
+                nome="Classificador de Nadador",
+                vida=55,
+                tipo_desafio="If/Else Aninhado",
+                pontos=110,
+                problema="Um algoritmo classifica nadadores por idade. Para um nadador de 15 anos, qual categoria será exibida?",
+                codigo=[
+                    "int idade = 15;",
+                    "if (idade >= 0 && idade <= 4) { printf('infantil A'); }",
+                    "else if (idade >= 5 && idade <= 7) { printf('infantil B'); }",
+                    "else if (idade >= 8 && idade <= 10) { printf('infantil C'); }",
+                    "else if (idade >= 11 && idade <= 13) { printf('juvenil A'); }",
+                    "else if (idade >= 14 && idade <= 17) { printf('juvenil B'); }",
+                    "else { printf('Adulto'); }"
+                ],
+                opcoes=[
+                    "A. infantil C",
+                    "B. juvenil A",
+                    "C. juvenil B",
+                    "D. Adulto"
+                ],
+                resposta_correta="C. juvenil B",
                 nivel_dificuldade="FAC_Basico"
             ),
-            # Adicione mais desafios FAC_Basico aqui
+            # --- FAC - Lista de Exercícios I - QUESTÃO 03: Peso Ideal ---
+            Desafio(
+                nome="Calculadora de Peso Ideal",
+                vida=60,
+                tipo_desafio="Condicionais e Fórmulas",
+                pontos=120,
+                problema="Um algoritmo calcula o peso ideal. Qual a fórmula para o gênero feminino?",
+                codigo=[
+                    "float h = 1.70; // altura",
+                    "char genero = 'F';",
+                    "float peso_ideal;",
+                    "if (genero == 'M') {",
+                    "   peso_ideal = (72.7 * h) - 58;",
+                    "} else if (genero == 'F') {",
+                    "   peso_ideal = __________;", # Linha a completar
+                    "}"
+                ],
+                opcoes=[
+                    "A. (62.1 * h) - 44.7",
+                    "B. (72.7 * h) - 58",
+                    "C. (62.1 * h) + 44.7",
+                    "D. (72.7 * h) + 58"
+                ],
+                resposta_correta="A. (62.1 * h) - 44.7",
+                nivel_dificuldade="FAC_Basico"
+            ),
+            # Adicione mais desafios FAC_Basico aqui...
         ],
         "FAC_Intermediario": [
             Desafio(
@@ -128,7 +180,7 @@ init python:
                 tipo_desafio="Vetor",
                 pontos=200,
                 problema="Corrija o código para ordenar os elementos de um vetor.",
-                codigo=["int arr[] = {5, 2, 8, 1};", "for (int i = 0; i < 4; i++) {", "  // Código de ordenação faltando", "}"],
+                codigo=["int arr[] = {5, 2, 8, 1};", "for (int i = 0; i < 4; i++) {", "   // Código de ordenação faltando", "}"],
                 opcoes=["Usar Bubble Sort", "Usar Selection Sort", "Usar Insertion Sort"],
                 resposta_correta="Usar Bubble Sort", # Exemplo
                 nivel_dificuldade="FAC_Intermediario"
@@ -151,9 +203,8 @@ init python:
         ],
         # Adicione outros níveis de dificuldade como "FPR_Avancado", "FAC_Avancado" etc.
     }
-
-
     
+
 
 
 
@@ -324,17 +375,60 @@ label end:
     # Returning from the top level quits the game.
     return
 
-label modo_DungeonCrawler:
-    "Bem-vindo ao Modo Prática! Aqui você pode treinar conceitos específicos."
+label modo_pratica:
+    "Bem-vindo à Masmorra da Lógica! Escolha o que praticar."
+    $ renpy.hide_dialogue()
+    $ store.jogador = Jogador("Programador") # Reinicia o jogador para cada sessão de prática
+    $ store.jogador.vida = store.jogador.vida_maxima
 
-    # Adicione a lógica para os desafios de prática aqui.
-    # Por exemplo, um menu que permite escolher qual tópico praticar.
-    
-    menu:
-        "Praticar If/Else":
-            jump desafio_if_else_pratica
-        "Praticar Loops":
-            jump desafio_loops_pratica
-        "Voltar ao Menu Principal":
-            return
+    # Loop principal para permitir que o jogador escolha tópicos repetidamente
+    while True:
+        "Sua pontuação atual no Modo Prática: [store.jogador.pontuacao_pratica]"
+        "Escolha o Nível de Dificuldade/Tópico para praticar:"
+        
+        # CHAMA A TELA PERSONALIZADA para a escolha de nível
+        $ escolha_nivel = renpy.call_screen("escolha_nivel_pratica_screen")
 
+        if escolha_nivel == "sair":
+            return # Sai do modo de prática e volta para o menu principal
+
+        "Você entrou na área de desafios de [escolha_nivel]!"
+        
+        # Cria uma cópia da lista de desafios para o nível escolhido e a embaralha
+        $ desafios_para_esta_sessao = list(store.desafio_por_dificuldade[escolha_nivel])
+        $ random.shuffle(desafios_para_esta_sessao)
+
+        # Loop para enfrentar os desafios dentro do nível de dificuldade escolhido
+        while desafios_para_esta_sessao and store.jogador.vida > 0:
+            $ desafio_atual = desafios_para_esta_sessao.pop(0) # Pega o próximo desafio e o remove
+            call batalha_de_turnos(desafio_atual) # Chama a rotina de batalha
+
+            if store.jogador.vida <= 0:
+                jump fim_de_jogo_pratica # Se o jogador morrer, o jogo acaba
+        
+        # Após completar todos os desafios de um nível ou morrer
+        if store.jogador.vida > 0:
+            "Você superou todos os desafios de [escolha_nivel]!"
+            "Sua pontuação atual: [store.jogador.pontuacao_pratica]"
+            "O que você gostaria de fazer agora?"
+        else:
+            jump fim_de_jogo_pratica # Garante que o jogo termina se a vida chegar a zero
+
+screen escolha_nivel_pratica_screen():
+    frame:
+        xalign 0.5
+        yalign 0.5
+        background "#2a2a2a"
+        padding 20
+
+        vbox:
+            spacing 15
+
+            text "Escolha um Nível de Dificuldade para Praticar:"
+
+            for nivel in store.desafio_por_dificuldade.keys():
+                textbutton nivel:
+                    action Return(nivel)
+            
+            textbutton "Sair do Modo Prática":
+                action Return("sair")
