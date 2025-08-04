@@ -12,7 +12,7 @@
 ##
 ## The _() surrounding the string marks it as eligible for translation.
 
-define config.name = _("Lifes as a code")
+define config.name = _("Byte Quest")
 
 define config.default_language = "portuguese"
 
@@ -37,7 +37,7 @@ define gui.about = _p("""
 ## distribution. This must be ASCII-only, and must not contain spaces, colons,
 ## or semicolons.
 
-define build.name = "Life as a code"
+define build.name = "ByteQuest"
 
 
 ## Sounds and music ############################################################
