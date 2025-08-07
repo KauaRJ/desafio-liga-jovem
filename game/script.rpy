@@ -37,6 +37,7 @@ init python:
 #begin start
 label start:
     console "Hello, world!"
+    return
 #end start
 
 label modo_DungeonCrawler:
