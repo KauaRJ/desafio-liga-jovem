@@ -81,6 +81,99 @@ style frame:
 ## In-game screens
 ################################################################################
 
+# Tela Principal de Combate
+screen combat_screen():
+    zorder 100
+    modal True
+    
+    add "#1a1a2e"
+    
+    frame:
+        style "combat_frame"
+
+        vbox:
+            xalign 0.1
+            yalign 0.2
+            text "Imagem do Herói" color "#ffffff"
+
+            null height 20
+
+            text "HP do Herói" color "#ffffff"
+            text "15/180" color "#ff5555"
+            
+            null height 20
+            
+            text "Mana" color "#ffffff"
+            text "38/59" color "#5555ff"
+            
+        vbox:
+            xalign 0.9
+            yalign 0.2
+            text "Imagem do Orc" color "#ffffff"
+
+            null height 20
+
+            text "HP do Orc" color "#ffffff"
+            text "15/180" color "#ff5555"
+            
+            null height 20
+            
+            text "Mana" color "#ffffff"
+            text "48/59" color "#5555ff"
+    
+    frame:
+        xalign 0.5
+        yalign 1.0
+        xsize 1280
+        ysize 300
+        style "combat_title_frame"
+
+        text "ESCOLHA SUA AÇÃO":
+            xalign 0.5
+            ypos 20
+            color "#00ff88"
+
+        grid 2 2:
+            xalign 0.5
+            yalign 0.5
+            xspacing 20
+            yspacing 20
+
+            textbutton "⚔️ ATACAR":
+                action Return("attack")
+                style "combat_button"
+            
+            textbutton " 🎒INVENTÁRIO":
+                action Return("inventory")
+                style "combat_button"
+            
+            textbutton "🛡️ DEFENDER":
+                action Return("defend")
+                style "combat_button"
+            
+            textbutton "🏃 FUGIR":
+                action Return("run")
+                style "combat_button"
+
+# Estilo para os botões de combate
+style combat_button:
+    background "#333366"
+    hover_background "#00ff88"
+    selected_background "#555588"
+    xsize 250
+    ysize 60
+
+style combat_frame:
+    xsize 1280
+    background "#1a1a2e"
+
+style combat_vbox:
+    spacing 10
+    xsize 300
+    ysize 200
+
+style combat_title_frame:
+    background "#222244"
 
 ## Say screen ##################################################################
 ##

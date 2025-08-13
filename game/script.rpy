@@ -32,11 +32,28 @@ init python:
 
     # Cria uma instância do jogador
     store.Jogador = Jogador("Heroi")
+
+# Exemplo de como iniciar a tela de combate
+label start_combat:
+    call screen combat_screen
+    $ result = _return
     
+    if result == "attack":
+        "Lógica de ataque será implementada aqui"
+    elif result == "inventory":
+        "Lógica de inventário será implementada aqui"
+    elif result == "defend":
+        "Lógica de defesa será implementada aqui"
+    elif result == "run":
+        "Lógica de fuga será implementada aqui"
+    
+    return
+
 # The game starts here.
 #begin start
 label start:
-    console "Hello, world!"
+    scene black with fade
+    call start_combat
     return
 #end start
 
