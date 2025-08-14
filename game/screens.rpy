@@ -88,39 +88,31 @@ screen combat_screen():
     
     add "#1a1a2e"
     
-    frame:
-        style "combat_frame"
-
-        vbox:
-            xalign 0.1
-            yalign 0.2
-            text "Imagem do Herói" color "#ffffff"
-
-            null height 20
-
-            text "HP do Herói" color "#ffffff"
-            text "15/180" color "#ff5555"
-            
-            null height 20
-            
-            text "Mana" color "#ffffff"
-            text "38/59" color "#5555ff"
-            
-        vbox:
-            xalign 0.9
-            yalign 0.2
-            text "Imagem do Orc" color "#ffffff"
-
-            null height 20
-
-            text "HP do Orc" color "#ffffff"
-            text "15/180" color "#ff5555"
-            
-            null height 20
-            
-            text "Mana" color "#ffffff"
-            text "48/59" color "#5555ff"
+    # Status do Herói
+    vbox:
+        xalign 0.1
+        yalign 0.1
+        text "HP do Herói" color "#ffffff"
+        text "[hero_hp]/[hero_max_hp]" color "#ff5555" size 28
+        
+        null height 20
+        
+        text "Mana" color "#ffffff"
+        text "[hero_mana]/[hero_max_mana]" color "#5555ff" size 28
     
+    # Status do Inimigo
+    vbox:
+        xalign 0.9
+        yalign 0.1
+        text "HP do Orc" color "#ffffff"
+        text "[enemy_hp]/[enemy_max_hp]" color "#ff5555" size 28
+        
+        null height 20
+        
+        text "Mana" color "#ffffff"
+        text "[enemy_mana]/[enemy_max_mana]" color "#5555ff" size 28
+    
+    # Título
     frame:
         xalign 0.5
         yalign 1.0
@@ -132,18 +124,20 @@ screen combat_screen():
             xalign 0.5
             ypos 20
             color "#00ff88"
-
+            outlines [(2, "#000000", 0, 0)]
+        
+        # Botões de ação
         grid 2 2:
             xalign 0.5
             yalign 0.5
             xspacing 20
             yspacing 20
-
+            
             textbutton "⚔️ ATACAR":
                 action Return("attack")
                 style "combat_button"
             
-            textbutton " 🎒INVENTÁRIO":
+            textbutton "🎒 INVENTÁRIO":
                 action Return("inventory")
                 style "combat_button"
             
@@ -174,6 +168,205 @@ style combat_vbox:
 
 style combat_title_frame:
     background "#222244"
+
+screen attack_screen():
+    zorder 200
+    modal True
+    add "#1a1a2e"
+    
+    vbox:
+        xalign 0.1
+        yalign 0.1
+        text "HP do Herói" color "#ffffff"
+        text "[hero_hp]/[hero_max_hp]" color "#ff5555" size 28
+        
+        null height 20
+        
+        text "Mana" color "#ffffff"
+        text "[hero_mana]/[hero_max_mana]" color "#5555ff" size 28
+    
+    # Status do Inimigo
+    vbox:
+        xalign 0.9
+        yalign 0.1
+        text "HP do Orc" color "#ffffff"
+        text "[enemy_hp]/[enemy_max_hp]" color "#ff5555" size 28
+        
+        null height 20
+        
+        text "Mana" color "#ffffff"
+        text "[enemy_mana]/[enemy_max_mana]" color "#5555ff" size 28
+    
+    # Título
+    frame:
+        xalign 0.5
+        yalign 1.0
+        xsize 1280
+        ysize 300
+        style "combat_title_frame"
+
+        text "ESCOLHA SUA AÇÃO":
+            xalign 0.5
+            ypos 20
+            color "#00ff88"
+            outlines [(2, "#000000", 0, 0)]
+        
+        # Botões de ação
+        grid 2 2:
+            xalign 0.5
+            yalign 0.5
+            xspacing 20
+            yspacing 20
+        
+            textbutton "Golpe Básico\nCusto: 0 Mana":
+                action Return("basic_attack")
+                style "attack_button"
+                sensitive hero_mana >= 0
+            
+            textbutton "Condicional\nCusto: 10 Mana":
+                action Return("if_attack")
+                style "attack_button"
+                sensitive hero_mana >= 10
+            
+            textbutton "Laço\nCusto: 15 Mana":
+                action Return("loop_attack")
+                style "attack_button"
+                sensitive hero_mana >= 15
+            
+            textbutton "Vetor\nCusto: 20 Mana":
+                action Return("vetor_attack")
+                style "attack_button"
+                sensitive hero_mana >= 20
+        
+        textbutton "VOLTAR":
+            xalign 0.1
+            yalign 0.1
+            action Return("back")
+            style "combat_button"
+
+# Estilos adicionais para a tela de ataque
+style attack_button:
+    background "#333366"
+    hover_background "#ff7b00ff"
+    selected_background "#555588"
+    xsize 250
+    ysize 80
+    size 24
+    color "#ffffff"
+    hover_color "#ffff00"
+    selected_color "#ffff00"
+    outlines [(2, "#000000", 0, 0)]
+
+style back_button:
+    background "#7f8c8d"
+    hover_background "#95a5a6"
+    xsize 200
+    ysize 40
+    size 24
+    color "#ffffff"
+    hover_color "#ffff00"
+
+screen inventory_screen():
+    zorder 200
+    modal True
+    add "#1a1a2e"
+    
+    vbox:
+        xalign 0.1
+        yalign 0.1
+        text "HP do Herói" color "#ffffff"
+        text "[hero_hp]/[hero_max_hp]" color "#ff5555" size 28
+        
+        null height 20
+        
+        text "Mana" color "#ffffff"
+        text "[hero_mana]/[hero_max_mana]" color "#5555ff" size 28
+    
+    # Status do Inimigo
+    vbox:
+        xalign 0.9
+        yalign 0.1
+        text "HP do Orc" color "#ffffff"
+        text "[enemy_hp]/[enemy_max_hp]" color "#ff5555" size 28
+        
+        null height 20
+        
+        text "Mana" color "#ffffff"
+        text "[enemy_mana]/[enemy_max_mana]" color "#5555ff" size 28
+    
+    # Título
+    frame:
+        xalign 0.5
+        yalign 1.0
+        xsize 1280
+        ysize 300
+        style "combat_title_frame"
+
+        text "ESCOLHA SUA AÇÃO":
+            xalign 0.5
+            ypos 20
+            color "#00ff88"
+            outlines [(2, "#000000", 0, 0)]
+        
+        # Botões de ação
+        grid 3 2:
+            xalign 0.5
+            yalign 0.5
+            xspacing 20
+            yspacing 20
+        
+            textbutton "Poção de Vida\nx[inventory['Poção de Vida']['quantity']]":
+                action Return("Poção de Vida")
+                style "item_button"
+                sensitive inventory['Poção de Vida']['quantity'] > 0
+        
+            # Poção de Mana
+            textbutton "Poção de Mana\nx[inventory['Poção de Mana']['quantity']]":
+                action Return("Poção de Mana")
+                style "item_button"
+                sensitive inventory['Poção de Mana']['quantity'] > 0
+            
+            # Antídoto
+            textbutton "Antídoto\nx[inventory['Antídoto']['quantity']]":
+                action Return("Antídoto")
+                style "item_button"
+                sensitive inventory['Antídoto']['quantity'] > 0
+            
+            # Bomba
+            textbutton "Bomba\nx[inventory['Bomba']['quantity']]":
+                action Return("Bomba")
+                style "item_button"
+                sensitive inventory['Bomba']['quantity'] > 0
+            
+            # Elixir Raro
+            textbutton "Elixir Raro\nx[inventory['Elixir Raro']['quantity']]":
+                action Return("Elixir Raro")
+                style "item_button"
+                sensitive inventory['Elixir Raro']['quantity'] > 0
+            
+            # Pergaminho
+            textbutton "Pergaminho\nx[inventory['Pergaminho']['quantity']]":
+                action Return("Pergaminho")
+                style "item_button"
+                sensitive inventory['Pergaminho']['quantity'] > 0
+        
+        textbutton "VOLTAR":
+            xalign 0.1
+            yalign 0.1
+            action Return("back")
+            style "back_button"
+
+style item_button:
+    background "#553388"
+    hover_background "#8844cc"
+    selected_background "#6644aa"
+    xsize 200
+    ysize 60
+    size 20
+    color "#ffffff"
+    hover_color "#ffff00"
+    selected_color "#ffff00"
+    outlines [(2, "#000000", 0, 0)]
 
 ## Say screen ##################################################################
 ##
