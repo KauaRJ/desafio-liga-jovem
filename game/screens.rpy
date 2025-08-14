@@ -368,6 +368,65 @@ style item_button:
     selected_color "#ffff00"
     outlines [(2, "#000000", 0, 0)]
 
+screen console_screen():
+    zorder 100
+    modal True
+
+    add "#000000"
+    hbox:
+        xsize 1280
+        ysize 720
+
+        # Main Container
+        vbox:
+            xalign 0.0
+
+            # Container 1
+            hbox:
+                frame:
+                    ysize 220
+                    xsize 220
+                    background "#0000ff"
+
+                    text "Coruja":
+                        xalign 0.5
+                        yalign 0.5
+
+                frame:
+                    ysize 220
+                    xsize 340
+                    background "#00ff00"
+
+                    text "Coruja Txt":
+                        xalign 0.5
+                        yalign 0.5
+                        color "#000000"
+            vbox:            
+                frame:
+                    xsize 560
+                    ysize 500
+                    xalign 0.5
+                    yalign 0.5
+                    background "#ff0000"
+
+                    text "Questão":
+                        xalign 0.5
+                        yalign 0.5
+
+        # Console Container
+        vbox:
+            xalign 1.0
+
+            frame:
+                xsize 720
+                ysize 720
+                background "black"
+
+                text "Console":
+                    xalign 0.5
+                    yalign 0.5
+        
+
 ## Say screen ##################################################################
 ##
 ## The say screen is used to display dialogue to the player. It takes two

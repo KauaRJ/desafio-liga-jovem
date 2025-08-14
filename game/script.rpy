@@ -198,7 +198,7 @@ label start:
         "Testar RPG":
             call start_combat
         "Testar Console":
-            "Desenvolvendo"
+            call screen console_screen
         "Encerrar":
             return
 
