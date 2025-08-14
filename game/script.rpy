@@ -194,8 +194,15 @@ label start_combat:
 # The game starts here.
 #begin start
 label start:
-    scene black with fade
-    call start_combat
+    menu:
+        "Testar RPG":
+            call start_combat
+        "Testar Console":
+            "Desenvolvendo"
+        "Encerrar":
+            return
+
+    call start
     return
 #end start
 
