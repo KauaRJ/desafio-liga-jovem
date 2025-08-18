@@ -86,33 +86,79 @@ screen combat_screen():
     zorder 100
     modal True
     
-    add "#1a1a2e"
-    
+    # Container Superior
+    frame:
+        background "#1a1a2e"
+        xsize 1280
+        ysize 420
+
     # Status do Herói
-    vbox:
-        xalign 0.1
-        yalign 0.1
-        text "HP do Herói" color "#ffffff"
-        text "[hero_hp]/[hero_max_hp]" color "#ff5555" size 28
-        
-        null height 20
-        
-        text "Mana" color "#ffffff"
-        text "[hero_mana]/[hero_max_mana]" color "#5555ff" size 28
+        vbox:
+            xalign 0.1
+            yalign 0.9
+            xmaximum 320
+
+            text "Herói":
+                xalign 0.5
+                
+            add "hero.png":
+                xalign 0.5
+                yalign 0.0
+                zoom 0.5
+
+
+            null height 10
+
+            text "HP: [hero_hp]/[hero_max_hp]" color "#ff5555":
+                xalign 0.5
+            bar value hero_hp range hero_max_hp:
+                xalign 0.5
+                xmaximum 200
+
+            null height 20
+            
+            text "Mana: [hero_mana]/[hero_max_mana]" color "#5555ff":
+                xalign 0.5
+            bar value hero_mana range hero_max_mana:
+                xmaximum 200
+                xalign 0.5
+
+
+            null height 20
+            
     
     # Status do Inimigo
-    vbox:
-        xalign 0.9
-        yalign 0.1
-        text "HP do Orc" color "#ffffff"
-        text "[enemy_hp]/[enemy_max_hp]" color "#ff5555" size 28
-        
-        null height 20
-        
-        text "Mana" color "#ffffff"
-        text "[enemy_mana]/[enemy_max_mana]" color "#5555ff" size 28
-    
-    # Título
+        vbox:
+            xalign 0.9
+            yalign 0.9
+            xmaximum 320
+
+            text "Inimigo":
+                xalign 0.5
+
+            add "opponent.png":
+                xalign 0.5
+                zoom 0.20
+
+            null height 10
+
+            text "HP: [enemy_hp]/[enemy_max_hp]" color "#ff5555":
+                xalign 0.5
+            bar value enemy_hp range enemy_max_hp:
+                xalign 0.5
+                xmaximum 200
+            
+            null height 20
+            
+            text "Mana: [enemy_mana]/[enemy_max_mana]" color "#5555ff":
+                xalign 0.5
+            bar value enemy_mana range enemy_max_mana:
+                xalign 0.5
+                xmaximum 200
+            
+            null height 20
+
+    # Container Inferior
     frame:
         xalign 0.5
         yalign 1.0
@@ -149,10 +195,9 @@ screen combat_screen():
                 action Return("run")
                 style "combat_button"
 
-# Estilo para os botões de combate
 style combat_button:
-    background "#333366"
-    hover_background "#00ff88"
+    background "#333366ff"
+    hover_background "#333366b3"
     selected_background "#555588"
     xsize 250
     ysize 60
@@ -169,35 +214,85 @@ style combat_vbox:
 style combat_title_frame:
     background "#222244"
 
+
+# Tela de Ataque
 screen attack_screen():
     zorder 200
     modal True
-    add "#1a1a2e"
     
-    vbox:
-        xalign 0.1
-        yalign 0.1
-        text "HP do Herói" color "#ffffff"
-        text "[hero_hp]/[hero_max_hp]" color "#ff5555" size 28
-        
-        null height 20
-        
-        text "Mana" color "#ffffff"
-        text "[hero_mana]/[hero_max_mana]" color "#5555ff" size 28
+    # Container Superior
+    frame:
+        background "#1a1a2e"
+        xsize 1280
+        ysize 420
+
+    # Status do Herói
+        vbox:
+            xalign 0.1
+            yalign 0.9
+            xmaximum 320
+
+            text "Herói":
+                xalign 0.5
+
+            add "hero.png":
+                xalign 0.5
+                yalign 0.5
+                zoom 0.5
+
+            null height 10
+
+            text "HP: [hero_hp]/[hero_max_hp]" color "#ff5555":
+                xalign 0.5
+            bar value hero_hp range hero_max_hp:
+                xalign 0.5
+                xmaximum 200
+
+            null height 20
+            
+            text "Mana: [hero_mana]/[hero_max_mana]" color "#5555ff":
+                xalign 0.5
+            bar value hero_mana range hero_max_mana:
+                xmaximum 200
+                xalign 0.5
+
+
+            null height 20
+            
     
     # Status do Inimigo
-    vbox:
-        xalign 0.9
-        yalign 0.1
-        text "HP do Orc" color "#ffffff"
-        text "[enemy_hp]/[enemy_max_hp]" color "#ff5555" size 28
-        
-        null height 20
-        
-        text "Mana" color "#ffffff"
-        text "[enemy_mana]/[enemy_max_mana]" color "#5555ff" size 28
+        vbox:
+            xalign 0.9
+            yalign 0.9
+            xmaximum 320
+
+            text "Inimigo":
+                xalign 0.5
+
+            add "opponent.png":
+                xalign 0.5
+                zoom 0.20
+
+            null height 10
+
+            text "HP: [enemy_hp]/[enemy_max_hp]" color "#ff5555":
+                xalign 0.5
+            bar value enemy_hp range enemy_max_hp:
+                xalign 0.5
+                xmaximum 200
+            
+            null height 20
+            
+            text "Mana: [enemy_mana]/[enemy_max_mana]" color "#5555ff":
+                xalign 0.5
+            bar value enemy_mana range enemy_max_mana:
+                xalign 0.5
+                xmaximum 200
+            
     
-    # Título
+            null height 20
+    
+    # Container Inferior
     frame:
         xalign 0.5
         yalign 1.0
@@ -244,10 +339,9 @@ screen attack_screen():
             action Return("back")
             style "combat_button"
 
-# Estilos adicionais para a tela de ataque
 style attack_button:
     background "#333366"
-    hover_background "#ff7b00ff"
+    hover_background "#333366c4"
     selected_background "#555588"
     xsize 250
     ysize 80
@@ -258,41 +352,90 @@ style attack_button:
     outlines [(2, "#000000", 0, 0)]
 
 style back_button:
-    background "#7f8c8d"
-    hover_background "#95a5a6"
+    background "#333366"
+    hover_background "#333366aa"
     xsize 200
     ysize 40
     size 24
     color "#ffffff"
     hover_color "#ffff00"
 
+# Tela de Inventário
 screen inventory_screen():
     zorder 200
     modal True
-    add "#1a1a2e"
     
-    vbox:
-        xalign 0.1
-        yalign 0.1
-        text "HP do Herói" color "#ffffff"
-        text "[hero_hp]/[hero_max_hp]" color "#ff5555" size 28
-        
-        null height 20
-        
-        text "Mana" color "#ffffff"
-        text "[hero_mana]/[hero_max_mana]" color "#5555ff" size 28
+    # Container Superior
+    frame:
+        background "#1a1a2e"
+        xsize 1280
+        ysize 420
+
+    # Status do Herói
+        vbox:
+            xalign 0.1
+            yalign 0.9
+            xmaximum 320
+
+            text "Herói":
+                xalign 0.5
+
+            add "hero.png":
+                xalign 0.5
+                yalign 0.5
+                zoom 0.5
+
+            null height 10
+
+            text "HP: [hero_hp]/[hero_max_hp]" color "#ff5555":
+                xalign 0.5
+            bar value hero_hp range hero_max_hp:
+                xalign 0.5
+                xmaximum 200
+
+            null height 20
+            
+            text "Mana: [hero_mana]/[hero_max_mana]" color "#5555ff":
+                xalign 0.5
+            bar value hero_mana range hero_max_mana:
+                xmaximum 200
+                xalign 0.5
+
+
+            null height 20
+            
     
     # Status do Inimigo
-    vbox:
-        xalign 0.9
-        yalign 0.1
-        text "HP do Orc" color "#ffffff"
-        text "[enemy_hp]/[enemy_max_hp]" color "#ff5555" size 28
-        
-        null height 20
-        
-        text "Mana" color "#ffffff"
-        text "[enemy_mana]/[enemy_max_mana]" color "#5555ff" size 28
+        vbox:
+            xalign 0.9
+            yalign 0.9
+            xmaximum 320
+
+            text "Inimigo":
+                xalign 0.5
+
+            add "opponent.png":
+                xalign 0.5
+                zoom 0.20
+
+            null height 10
+
+            text "HP: [enemy_hp]/[enemy_max_hp]" color "#ff5555":
+                xalign 0.5
+            bar value enemy_hp range enemy_max_hp:
+                xalign 0.5
+                xmaximum 200
+            
+            null height 20
+            
+            text "Mana: [enemy_mana]/[enemy_max_mana]" color "#5555ff":
+                xalign 0.5
+            bar value enemy_mana range enemy_max_mana:
+                xalign 0.5
+                xmaximum 200
+            
+    
+            null height 20
     
     # Título
     frame:
@@ -357,8 +500,8 @@ screen inventory_screen():
             style "back_button"
 
 style item_button:
-    background "#553388"
-    hover_background "#8844cc"
+    background "#333366"
+    hover_background "#333366aa"
     selected_background "#6644aa"
     xsize 200
     ysize 60
@@ -401,7 +544,7 @@ screen console_screen():
                         xalign 0.5
                         yalign 0.5
                         color "#000000"
-            vbox:            
+            vbox:
                 frame:
                     xsize 560
                     ysize 500
