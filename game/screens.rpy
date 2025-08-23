@@ -106,7 +106,6 @@ screen combat_screen():
                 yalign 0.0
                 zoom 0.5
 
-
             null height 10
 
             text "HP: [hero_hp]/[hero_max_hp]" color "#ff5555":
@@ -122,7 +121,6 @@ screen combat_screen():
             bar value hero_mana range hero_max_mana:
                 xmaximum 200
                 xalign 0.5
-
 
             null height 20
             
@@ -780,8 +778,12 @@ screen navigation():
     vbox:
         style_prefix "navigation"
 
-        xpos gui.navigation_xpos
-        yalign 0.5
+        if renpy.get_screen("main_menu"):
+            xalign 0.5
+            yalign 0.75
+        else:
+            xoffset 60
+            yalign 0.5
 
         spacing gui.navigation_spacing
 
@@ -830,6 +832,7 @@ style navigation_button:
 
 style navigation_button_text:
     properties gui.text_properties("navigation_button")
+    xalign 0.5
 
 
 ## Main Menu screen ############################################################
@@ -843,7 +846,8 @@ screen main_menu():
     ## This ensures that any other menu screen is replaced.
     tag menu
 
-    add gui.main_menu_background
+    add gui.main_menu_background:
+        zoom 0.40
 
     ## This empty frame darkens the main menu.
     frame:
@@ -875,7 +879,7 @@ style main_menu_frame:
     xsize 280
     yfill True
 
-    background "gui/overlay/main_menu.png"
+    # background "gui/overlay/main_menu.png"
 
 style main_menu_vbox:
     xalign 1.0
@@ -1021,10 +1025,8 @@ style game_menu_label_text:
     yalign 0.5
 
 style return_button:
-    xpos gui.navigation_xpos
-    yalign 1.0
-    yoffset -30
-
+    xpos 60
+    yalign 0.8
 
 ## About screen ################################################################
 ##
