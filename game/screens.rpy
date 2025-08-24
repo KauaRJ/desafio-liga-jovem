@@ -780,7 +780,13 @@ screen navigation():
 
         if renpy.get_screen("main_menu"):
             xalign 0.5
-            yalign 0.75
+            yalign 0.5
+
+            add "logo":
+                zoom 0.1
+                xalign 0.5
+                xoffset -30
+                
         else:
             xoffset 60
             yalign 0.5
@@ -788,6 +794,8 @@ screen navigation():
         spacing gui.navigation_spacing
 
         if main_menu:
+
+            
 
             textbutton _("Start") action Start()
 
@@ -832,8 +840,7 @@ style navigation_button:
 
 style navigation_button_text:
     properties gui.text_properties("navigation_button")
-    xalign 0.5
-
+    xalign 0.5 
 
 ## Main Menu screen ############################################################
 ##
@@ -846,8 +853,7 @@ screen main_menu():
     ## This ensures that any other menu screen is replaced.
     tag menu
 
-    add gui.main_menu_background:
-        zoom 0.40
+    add "#222222"
 
     ## This empty frame darkens the main menu.
     frame:
